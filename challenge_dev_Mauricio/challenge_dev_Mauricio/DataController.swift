@@ -67,6 +67,18 @@ class DataController: NSObject {
     
     
     }
+    
+    func eraseStudents(entry: NSManagedObject ) {
+    
+        var delegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        var managedContext = delegate.managedObjectContext!
+        var error: NSError?
+
+    managedContext.deleteObject(entry)
+    
+    managedContext.save(&error)
+    
+    }
 
 
 

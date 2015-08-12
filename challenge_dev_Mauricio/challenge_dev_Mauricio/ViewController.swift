@@ -70,7 +70,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
     }
     
-  
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == UITableViewCellEditingStyle.Delete {
+        
+        
+        DataController.sharedInstance.eraseStudents(DataController.sharedInstance.newStudents[indexPath.row])
+            
+         DataController.sharedInstance.newStudents.removeAtIndex(indexPath.row)
+            
+        
+            
+         tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+        
+        
+        }
+    }
 
     
     func new() {
@@ -88,7 +102,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             DataController.sharedInstance.newStudent(textField.text)
             
             println("Text field: \(textField.text)")
-
+            
+            DataController.sharedInstance.loadStudents(self)
             
         }
         
